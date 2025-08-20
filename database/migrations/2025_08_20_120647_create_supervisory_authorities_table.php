@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('registries', function (Blueprint $table) {
+        Schema::create('supervisory_authorities', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('registries');
+        Schema::dropIfExists('supervisory_authorities');
     }
 };

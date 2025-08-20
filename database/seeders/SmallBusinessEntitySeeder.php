@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Registry;
+use App\Models\SmallBusinessEntity;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class RegistrySeeder extends Seeder
+class SmallBusinessEntitySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Registry::factory(15)->create();
+        SmallBusinessEntity::factory(1000)->create();
     }
 }
