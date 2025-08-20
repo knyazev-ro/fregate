@@ -1,4 +1,4 @@
-import { DocumentChartBarIcon } from "@heroicons/react/16/solid";
+import { ChartBarIcon, DocumentArrowUpIcon, DocumentChartBarIcon, DocumentCurrencyBangladeshiIcon } from "@heroicons/react/16/solid";
 import { router } from "@inertiajs/react";
 
 export default function Sidebar() {
@@ -7,12 +7,12 @@ export default function Sidebar() {
         {
             name: 'Реестр плановых проверок',
             href: route('registry.index'),
-            bigIcon: DocumentChartBarIcon 
+            bigIcon: ChartBarIcon 
         },
                 {
             name: 'Форма добавления',
             href: route('registry.index'),
-            bigIcon: DocumentChartBarIcon 
+            bigIcon: DocumentArrowUpIcon 
         },
     ]
 
@@ -20,8 +20,8 @@ export default function Sidebar() {
         <div className="w-64 text-black flex-col bg-gray-100 flex p-4">
             {
                 menuItems.map((item, index) => (
-                    <div className="flex items-center border-b-1 gap-2 p-2 hover:bg-gray-200 cursor-pointer" key={index} onClick={() => router.get(item.href)}>
-                        <DocumentChartBarIcon className="w-5 min-w-5 max-w-5 fill-black" />
+                    <div className="flex items-center text-xs font-medium border-b-1 gap-2 p-3 leading-3.5 hover:bg-gray-200 cursor-pointer" key={index} onClick={() => router.get(item.href)}>
+                        {<item.bigIcon className="min-w-5 max-w-5 fill-black" />}
                         {item.name}
                     </div>
                 ))

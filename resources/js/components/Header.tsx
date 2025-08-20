@@ -11,8 +11,8 @@ export default function Header() {
             </div>
             <div
             onClick={() => router.post(route('logout'))}
-             className='flex hover:bg-gray-100 p-2 rounded-xs items-center cursor-pointer'>
-                {"Выход"}
+             className='flex hover:bg-gray-100 p-2 text-sm rubik rounded-xs items-center cursor-pointer'>
+                {"ВЫХОД"}
                 <RectangleGroupIcon className='ml-2 size-5 fill-black' />
             </div>
         </div>

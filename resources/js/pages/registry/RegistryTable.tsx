@@ -30,6 +30,7 @@ const RegistryTable = () => {
             // { accessorKey: 'id', header: 'ID' },
             {
                 accessorKey: 'author.name',
+                cell: (value) => <div className="bg-blue-500 flex justify-center font-medium rubik text-xs p-1 text-white">{value.getValue()?.toUpperCase() ?? ''}</div>,
                 header: <ColumnHeader title={'АВТОР'} col={'author.name'} sortAndFilter={sortAndFilter} setSortAndFilter={setSortAndFilter} />,
             },
             {
@@ -64,7 +65,7 @@ const RegistryTable = () => {
                         setSortAndFilter={setSortAndFilter}
                     />
                 ),
-                cell: (value) => <div className="">{format(parseISO(value.getValue()), 'MM-dd-yyyy')}</div>,
+                cell: (value) => <div className="">{format(parseISO(value.getValue()), 'dd-MM-yyyy')}</div>,
             },
             {
                 accessorKey: 'end_verification',
@@ -76,7 +77,7 @@ const RegistryTable = () => {
                         setSortAndFilter={setSortAndFilter}
                     />
                 ),
-                cell: (value) => <div className="">{format(parseISO(value.getValue()), 'MM-dd-yyyy')}</div>,
+                cell: (value) => <div className="">{format(parseISO(value.getValue()), 'dd-MM-yyyy')}</div>,
             },
             {
                 accessorKey: 'duration',
@@ -97,7 +98,7 @@ const RegistryTable = () => {
         setLoading(true);
         try {
             const res = await axios.get(route('registry.index'), {
-                params: { page: page + 1, perPage },
+                params: { page: page + 1, perPage, ...sortAndFilter },
             });
             setData(res.data.data);
             setTotal(res.data.total);
@@ -109,7 +110,7 @@ const RegistryTable = () => {
 
     useEffect(() => {
         fetchUsers();
-    }, [page, perPage]);
+    }, [page, perPage, sortAndFilter]);
 
     const handlePageChange = (event, newPage) => setPage(newPage);
     const handleRowsPerPageChange = (event) => {
@@ -133,7 +134,7 @@ const RegistryTable = () => {
                     additionl={() => (
                         <>
                             <button
-                                className="cursor-pointer rounded-full bg-blue-500 py-3 px-4 text-white transition-colors hover:bg-blue-800 active:bg-blue-500"
+                                className="cursor-pointer rounded-xs font-medium bg-blue-500 py-3 px-4 text-white transition-colors hover:bg-blue-800 active:bg-blue-500"
                                 onClick={() => router.get(route('users.create'))}
                             >
                                 Добавить проверку
