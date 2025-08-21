@@ -15,9 +15,6 @@ const RegistryTable = () => {
     const [perPage, setPerPage] = useState(10);
     const [page, setPage] = useState(0);
     const [loading, setLoading] = useState(true);
-    const [importData, setImportData] = useState({
-        file: null,
-    });
 
     const [sortAndFilter, setSortAndFilter] = useState({
         filters: [],

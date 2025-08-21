@@ -23,7 +23,7 @@ export default function EditRegistry({ registry }) {
             : null,
     };
 
-    const { data, setData, errors } = useForm({
+    const { data, setData } = useForm({
         small_business_entity_id: registry?.small_business_entity_id ?? null,
         supervisory_authority_id: registry?.supervisory_authority_id ?? null,
         start_verification: registry?.start_verification ?? null,
