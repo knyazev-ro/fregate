@@ -14,7 +14,13 @@ use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RegistryController extends Controller
-{
+{    
+    /**
+     * Рендер страницы показа таблицы и пагинация
+     *
+     * @param  mixed $request
+     * @return LengthAwarePaginator
+     */
     public function index(Request $request): LengthAwarePaginator|\Inertia\Response
     {
         if ($request->has('page')) {
@@ -45,7 +51,14 @@ class RegistryController extends Controller
 
         return Inertia::render('registry/RegistryTable');
     }
-
+    
+    /**
+     * Фильтры.
+     *
+     * @param  mixed $registry
+     * @param  mixed $request
+     * @return void
+     */
     public function applyFilters($registry, $request)
     {
         $filters = $request->filters ?? [];
@@ -121,13 +134,25 @@ class RegistryController extends Controller
     {
         return Excel::download(new RegistryExport([$id]), "registry" . now()->format('Y-M-d h:i:s') . ".xlsx");
     }
-
+    
+    /**
+     * Экспорт с ФИЛЬТРАМИ! Те фильтры, что выбраны на фронте определяют что в экспорте.
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function exportMany(Request $request) {
         $registry  = Registry::query();
         $registry =  $this->applyFilters($registry, $request);
         return Excel::download(new RegistryExport($registry->pluck('id')->toArray()), "registry" . now()->format('Y-M-d h:i:s') . ".xlsx");
     }
-
+    
+    /**
+     * Импорт проверок в реестр.
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function import(Request $request){
         $validated = $request->validate([
             'file' => 'required|file|max:8128'
