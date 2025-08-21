@@ -15,6 +15,9 @@ const RegistryTable = () => {
     const [perPage, setPerPage] = useState(10);
     const [page, setPage] = useState(0);
     const [loading, setLoading] = useState(true);
+    const [importData, setImportData] = useState({
+        file: null,
+    })
 
     const [sortAndFilter, setSortAndFilter] = useState({
         filters: [],
@@ -26,7 +29,7 @@ const RegistryTable = () => {
 
     const columns = useMemo(
         () => [
-            { accessorKey: 'action', header: 'Actions'.toUpperCase(), cell: (value) => <CellAction value={value} /> },
+            { accessorKey: 'action', header: 'ДЕЙСТВИЯ'.toUpperCase(), cell: (value) => <CellAction value={value} /> },
             // { accessorKey: 'id', header: 'ID' },
             {
                 accessorKey: 'author.name',
@@ -136,7 +139,26 @@ const RegistryTable = () => {
                     onRowsPerPageChange={handleRowsPerPageChange}
                     title="Реестр"
                     additionl={() => (
-                        <div className="flex w-full justify-end gap-4">
+                        <div className="flex w-full flex-wrap justify-end gap-1 text-xs">
+                            <div
+                                className="cursor-pointer rounded-xs bg-blue-500 px-4 py-3 font-medium text-white transition-colors hover:bg-blue-800 active:bg-blue-500"
+                            
+                            >
+                                <input
+                                type='file'
+                                accept={".xlsx"}
+                                onChange={(e) => {
+                                    try{
+                                        axios.postForm(route('registry.import'), {
+                                            file: e?.target?.files[0] ?? null,
+                                        });
+                                    } catch(err) {
+                                        console.log(err);
+                                    }
+                                }}
+                                />
+                                Импортировать
+                            </div>
                             <div
                                 onClick={() => {
                                     axios

@@ -24,6 +24,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/export', 'export')->name('export');
         Route::get('/one/export/{id}', 'exportOne')->name('export.one');
         Route::get('/many/export', 'exportMany')->name('export.many');
+        Route::post('/import', 'import')->name('import');
     });
 
     Route::prefix('sbe')->name('sbe.')->controller(SmallBusinessEntityController::class)->group(function () {

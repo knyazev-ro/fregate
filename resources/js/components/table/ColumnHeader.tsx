@@ -40,7 +40,7 @@ export default function ColumnHeader({
                 {filter && (
                     <input
                         type="text"
-                        className="rounded-md bg-white px-2 text-sm text-black"
+                        className="rounded-md bg-white px-2 py-1 font-medium  text-sm text-black"
                         onChange={(e) => {
                             setSortAndFilter({
                                 ...sortAndFilter,

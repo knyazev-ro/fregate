@@ -15,7 +15,7 @@ interface LoginProps {
 
 export default function Login({ status, canResetPassword }: LoginProps) {
     return (
-        <AuthLayout title="Log in to your account" description="Enter your email and password below to log in">
+        <AuthLayout title="Войти в аккаунт" description="Введите электронную почту и пароль, чтобы войти">
             <Head title="Log in" />
 
             <Form method="post" action={route('login')} resetOnSuccess={['password']} className="flex flex-col gap-6">
@@ -23,7 +23,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                     <>
                         <div className="grid gap-6">
                             <div className="grid gap-2">
-                                <Label htmlFor="email">Email address</Label>
+                                <Label htmlFor="email">Электронная почта</Label>
                                 <Input
                                     id="email"
                                     type="email"
@@ -39,10 +39,10 @@ export default function Login({ status, canResetPassword }: LoginProps) {
 
                             <div className="grid gap-2">
                                 <div className="flex items-center">
-                                    <Label htmlFor="password">Password</Label>
+                                    <Label htmlFor="password">Пароль</Label>
                                     {canResetPassword && (
                                         <TextLink href={route('password.request')} className="ml-auto text-sm" tabIndex={5}>
-                                            Forgot password?
+                                            Забыли пароль?
                                         </TextLink>
                                     )}
                                 </div>
@@ -60,19 +60,19 @@ export default function Login({ status, canResetPassword }: LoginProps) {
 
                             <div className="flex items-center space-x-3">
                                 <Checkbox id="remember" name="remember" tabIndex={3} />
-                                <Label htmlFor="remember">Remember me</Label>
+                                <Label htmlFor="remember">Запомнить меня</Label>
                             </div>
 
                             <Button type="submit" className="mt-4 w-full" tabIndex={4} disabled={processing}>
                                 {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-                                Log in
+                                Войти
                             </Button>
                         </div>
 
                         <div className="text-center text-sm text-muted-foreground">
-                            Don't have an account?{' '}
+                            Еще нет аккаунта?{' '}
                             <TextLink href={route('register')} tabIndex={5}>
-                                Sign up
+                                Зарегистрироваться
                             </TextLink>
                         </div>
                     </>

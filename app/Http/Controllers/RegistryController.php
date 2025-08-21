@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Exports\RegistryExport;
+use App\Imports\RegistryImport;
 use App\Models\Registry;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Inertia\Inertia;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RegistryController extends Controller
@@ -124,5 +126,22 @@ class RegistryController extends Controller
         $registry  = Registry::query();
         $registry =  $this->applyFilters($registry, $request);
         return Excel::download(new RegistryExport($registry->pluck('id')->toArray()), "registry" . now()->format('Y-M-d h:i:s') . ".xlsx");
+    }
+
+    public function import(Request $request){
+        $validated = $request->validate([
+            'file' => 'required|file|max:8128'
+        ]);
+
+        try{
+            $file = $validated['file'];
+            Excel::import(new RegistryImport, $file);
+            return response()->json();
+        } catch(\Exception $e) 
+        {
+            Log::error($e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
     }
 }
