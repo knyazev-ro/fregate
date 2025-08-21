@@ -26,7 +26,7 @@ const RegistryTable = () => {
 
     const columns = useMemo(
         () => [
-            { accessorKey: 'action', header: 'Actions'.toUpperCase(), cell: (value) => <CellAction /> },
+            { accessorKey: 'action', header: 'Actions'.toUpperCase(), cell: (value) => <CellAction value={value}/> },
             // { accessorKey: 'id', header: 'ID' },
             {
                 accessorKey: 'author.name',
@@ -135,7 +135,7 @@ const RegistryTable = () => {
                         <>
                             <button
                                 className="cursor-pointer rounded-xs font-medium bg-blue-500 py-3 px-4 text-white transition-colors hover:bg-blue-800 active:bg-blue-500"
-                                onClick={() => router.get(route('users.create'))}
+                                onClick={() => router.get(route('registry.create'))}
                             >
                                 Добавить проверку
                             </button>

@@ -1,4 +1,4 @@
-import { ChartBarIcon, DocumentArrowUpIcon, DocumentChartBarIcon, DocumentCurrencyBangladeshiIcon } from "@heroicons/react/16/solid";
+import { BuildingOffice2Icon, BuildingOfficeIcon, ChartBarIcon, DocumentArrowUpIcon, DocumentChartBarIcon, DocumentCurrencyBangladeshiIcon } from "@heroicons/react/16/solid";
 import { router } from "@inertiajs/react";
 
 export default function Sidebar() {
@@ -11,8 +11,18 @@ export default function Sidebar() {
         },
                 {
             name: 'Форма добавления',
-            href: route('registry.index'),
+            href: route('registry.create'),
             bigIcon: DocumentArrowUpIcon 
+        },
+                        {
+            name: 'Субъекты малого предпринимательства',
+            href: route('sbe.index'),
+            bigIcon: BuildingOffice2Icon 
+        },
+                                {
+            name: 'Добавить СМП',
+            href: route('sbe.create'),
+            bigIcon: BuildingOfficeIcon 
         },
     ]
 

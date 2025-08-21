@@ -2,7 +2,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { ArrowDownOnSquareStackIcon, PencilIcon, Square3Stack3DIcon, TrashIcon } from '@heroicons/react/16/solid';
 import { router } from '@inertiajs/react';
 
-export default function CellAction({ value }) {
+export default function CellActionSubject({ value }) {
     return (
         <div className="relative">
             <Menu>
@@ -17,25 +17,18 @@ export default function CellAction({ value }) {
                 >
                     <MenuItem>
                         <button
-                        onClick={() => router.get(route('registry.edit', value?.row?.original?.id))}
+                        onClick={() => router.get(route('sbe.edit', value?.row?.original?.id))}
                         className="group flex w-full cursor-pointer items-center gap-2 rounded-xs px-3 py-1.5 hover:bg-blue-100">
                             <PencilIcon className="size-4 fill-stone-950" />
                             Редактировать
                             <kbd className="ml-auto hidden font-sans text-xs text-white/50 group-data-focus:inline">⌘E</kbd>
                         </button>
                     </MenuItem>
-                    <MenuItem>
-                        <button className="group flex w-full cursor-pointer items-center gap-2 rounded-xs px-3 py-1.5 hover:bg-blue-100">
-                            <ArrowDownOnSquareStackIcon className="size-4 fill-stone-950" />
-                            Экспорт
-                            <kbd className="ml-auto hidden font-sans text-xs text-white/50 group-data-focus:inline">⌘D</kbd>
-                        </button>
-                    </MenuItem>
                     <div className="my-1 h-px bg-white/5" />
                     <MenuItem>
                         <button
                             onClick={() =>
-                                router.delete(route('registry.destroy', value?.row?.original?.id), {
+                                router.delete(route('sbe.destroy', value?.row?.original?.id), {
                                     preserveState: false,
                                 })
                             }

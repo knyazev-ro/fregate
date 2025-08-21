@@ -41,6 +41,9 @@ export default function ColumnDPHeader({
                 <div onClick={() => handleFilter()}>{title}</div>
                 {filter && (
                     <DatePicker
+                      popoverProps={{
+    className: "bg-white dark:bg-sky-600 shadow-lg rounded-xl z-[9999]"
+  }}
                         className="z-10"
                         value={sortAndFilter.filters.find((f: any) => f.column === col)?.value ? parseDate(sortAndFilter.filters.find((f: any) => f.column === col).value) : null}
                         onChange={(date) => {

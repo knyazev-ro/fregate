@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Inertia\Inertia;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class RegistryController extends Controller
 {
@@ -56,5 +57,48 @@ class RegistryController extends Controller
         }
 
         return Inertia::render('registry/RegistryTable');
+    }
+
+    public function editOrCreate(int|null $id = null)
+    {
+        $registry = $id ? Registry::findOrFail($id)->load([
+            'author',
+            'smallBusinessEntity',
+            'supervisoryAuthority',
+        ]) : new Registry();
+        return Inertia::render('registry/EditRegistry', compact('registry'));
+    }
+
+    public function updateOrStore(Request $request, int|null $id = null) 
+    {
+        $data = $request->validate([
+            'small_business_entity_id' => 'required|exists:small_business_entities,id',
+            'supervisory_authority_id' => 'required|exists:supervisory_authorities,id',
+            'start_verification' => 'required|date',
+            'end_verification' => 'required|date|after_or_equal:start_verification',
+            'duration' => 'required|integer|min:0',
+        ], [
+            'small_business_entity_id.required' => 'Поле СМП обязательно для заполнения.',
+            'supervisory_authority_id.required' => 'Поле Надзорный орган обязательно для заполнения.',
+            'start_verification.required' => 'Поле Начало проверки обязательно для заполнения.',
+            'end_verification.required' => 'Поле Окончание проверки обязательно для заполнения.',
+            'end_verification.after_or_equal' => 'Поле Окончание проверки должно быть датой после или равной Началу проверки.',
+            'duration.required' => 'Поле Продолжительность (дней) обязательно для заполнения.',
+            'duration.integer' => 'Поле Продолжительность (дней) должно быть целым числом.',
+            'duration.min' => 'Поле Продолжительность (дней) должно быть неотрицательным числом.',
+        ]);
+
+        if(!$id) {
+            $data['author_id'] = Auth::id();
+        }
+
+        Registry::updateOrCreate(['id' => $id], $data);
+        return redirect()->route('registry.index');
+    }
+
+    public function destroy(Registry $registry)
+    {
+        $registry->delete();
+        return redirect()->route('registry.index');
     }
 }
