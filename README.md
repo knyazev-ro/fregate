@@ -111,6 +111,7 @@ php artisan view:cache
 ![4](https://i.imgur.com/NR9vZ0z.png)
 ![5](https://i.imgur.com/D0EwaZV.png)
 ![6](https://i.imgur.com/zr5Gksn.png)
+![6](https://i.imgur.com/CzDicgu.png)
 ![7](https://i.imgur.com/fUCF3p6.png)
 ![8](https://i.imgur.com/EN5e74W.png)
 ![9](https://i.imgur.com/SdisifJ.png)
