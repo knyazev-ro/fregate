@@ -21,6 +21,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/store', 'updateOrStore')->name('store');
         Route::put('/update/{id}', 'updateOrStore')->name('update');
         Route::delete('/delete/{registry}', 'destroy')->name('destroy');
+        Route::get('/export', 'export')->name('export');
+        Route::get('/one/export/{id}', 'exportOne')->name('export.one');
     });
 
     Route::prefix('sbe')->name('sbe.')->controller(SmallBusinessEntityController::class)->group(function () {

@@ -26,11 +26,15 @@ const RegistryTable = () => {
 
     const columns = useMemo(
         () => [
-            { accessorKey: 'action', header: 'Actions'.toUpperCase(), cell: (value) => <CellAction value={value}/> },
+            { accessorKey: 'action', header: 'Actions'.toUpperCase(), cell: (value) => <CellAction value={value} /> },
             // { accessorKey: 'id', header: 'ID' },
             {
                 accessorKey: 'author.name',
-                cell: (value) => <div className="bg-blue-500 flex justify-center font-medium rubik text-xs p-1 text-white">{value.getValue()?.toUpperCase() ?? ''}</div>,
+                cell: (value) => (
+                    <div className="rubik flex justify-center bg-blue-500 p-1 text-xs font-medium text-white">
+                        {value.getValue()?.toUpperCase() ?? ''}
+                    </div>
+                ),
                 header: <ColumnHeader title={'АВТОР'} col={'author.name'} sortAndFilter={sortAndFilter} setSortAndFilter={setSortAndFilter} />,
             },
             {
@@ -132,14 +136,20 @@ const RegistryTable = () => {
                     onRowsPerPageChange={handleRowsPerPageChange}
                     title="Реестр"
                     additionl={() => (
-                        <>
+                        <div className='w-full flex justify-end gap-4'>
+                            <a
+                                className="cursor-pointer rounded-xs bg-blue-500 px-4 py-3 font-medium text-white transition-colors hover:bg-blue-800 active:bg-blue-500"
+                                href={route('registry.export')}
+                            >
+                                Экспорт
+                            </a>
                             <button
-                                className="cursor-pointer rounded-xs font-medium bg-blue-500 py-3 px-4 text-white transition-colors hover:bg-blue-800 active:bg-blue-500"
+                                className="cursor-pointer rounded-xs bg-blue-500 px-4 py-3 font-medium text-white transition-colors hover:bg-blue-800 active:bg-blue-500"
                                 onClick={() => router.get(route('registry.create'))}
                             >
                                 Добавить проверку
                             </button>
-                        </>
+                        </div>
                     )}
                 />
             </div>

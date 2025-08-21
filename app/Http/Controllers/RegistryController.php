@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RegistryExport;
 use App\Models\Registry;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Inertia\Inertia;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RegistryController extends Controller
 {
@@ -100,5 +102,15 @@ class RegistryController extends Controller
     {
         $registry->delete();
         return redirect()->route('registry.index');
+    }
+
+    public function export()
+    {
+        return Excel::download(new RegistryExport, "registry" . now()->format('Y-M-d h:i:s') . ".xlsx");
+    }
+
+    public function exportOne(int $id)
+    {
+        return Excel::download(new RegistryExport($id), "registry" . now()->format('Y-M-d h:i:s') . ".xlsx");
     }
 }
