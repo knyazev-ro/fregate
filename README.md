@@ -104,6 +104,21 @@ php artisan view:cache
   ```
 
 ---
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/MLdWYoA"  ><a href="//imgur.com/a/MLdWYoA">Int freg</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+## Интерфейс
+![1](https://i.imgur.com/CRPT2VM.png)
+![2](https://i.imgur.com/6Mb4AP3.png)
+![3](https://i.imgur.com/WYxTdf2.png)
+![4](https://i.imgur.com/NR9vZ0z.png)
+![5](https://i.imgur.com/D0EwaZV.png)
+![6](https://i.imgur.com/zr5Gksn.png)
+![7](https://i.imgur.com/fUCF3p6.png)
+![8](https://i.imgur.com/EN5e74W.png)
+![9](https://i.imgur.com/SdisifJ.png)
+![10](https://i.imgur.com/Npohrdm.png)
+![11](https://i.imgur.com/56NZXEn.png)
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/ksuS1j5"  ><a href="//imgur.com/a/ksuS1j5">db</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+
+
+## База данных
+![База данных](https://i.imgur.com/E2L7a8C.png)
