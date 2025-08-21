@@ -1,4 +1,3 @@
-import AppLogoIcon from '@/components/app-logo-icon';
 import { Link } from '@inertiajs/react';
 import { ShipIcon } from 'lucide-react';
 import { type PropsWithChildren } from 'react';
@@ -11,7 +10,7 @@ interface AuthLayoutProps {
 
 export default function AuthSimpleLayout({ children, title, description }: PropsWithChildren<AuthLayoutProps>) {
     return (
-        <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10 rubik">
+        <div className="rubik flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
             <div className="w-full max-w-sm">
                 <div className="flex flex-col gap-8">
                     <div className="flex flex-col items-center gap-4">
@@ -19,9 +18,7 @@ export default function AuthSimpleLayout({ children, title, description }: Props
                             <div className="mb-1 flex h-12 w-12 items-center justify-center rounded-md">
                                 <ShipIcon className="size-12 fill-blue-500 text-[var(--foreground)] dark:text-white" />
                             </div>
-                            <div className='font-bold text-xl'>
-                                {"ИНТЕРНЕТ-ФРЕГАТ"}
-                            </div>
+                            <div className="text-xl font-bold">{'ИНТЕРНЕТ-ФРЕГАТ'}</div>
                             <span className="sr-only">{title}</span>
                         </Link>
 

@@ -1,5 +1,5 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
-import { ArrowDownOnSquareStackIcon, PencilIcon, Square3Stack3DIcon, TrashIcon } from '@heroicons/react/16/solid';
+import { PencilIcon, Square3Stack3DIcon, TrashIcon } from '@heroicons/react/16/solid';
 import { router } from '@inertiajs/react';
 
 export default function CellActionSubject({ value }) {
@@ -17,8 +17,9 @@ export default function CellActionSubject({ value }) {
                 >
                     <MenuItem>
                         <button
-                        onClick={() => router.get(route('sbe.edit', value?.row?.original?.id))}
-                        className="group flex w-full cursor-pointer items-center gap-2 rounded-xs px-3 py-1.5 hover:bg-blue-100">
+                            onClick={() => router.get(route('sbe.edit', value?.row?.original?.id))}
+                            className="group flex w-full cursor-pointer items-center gap-2 rounded-xs px-3 py-1.5 hover:bg-blue-100"
+                        >
                             <PencilIcon className="size-4 fill-stone-950" />
                             Редактировать
                             <kbd className="ml-auto hidden font-sans text-xs text-white/50 group-data-focus:inline">⌘E</kbd>

@@ -41,11 +41,15 @@ export default function ColumnDPHeader({
                 <div onClick={() => handleFilter()}>{title}</div>
                 {filter && (
                     <DatePicker
-                      popoverProps={{
-    className: "bg-white dark:bg-sky-600 shadow-lg rounded-xl z-[9999]"
-  }}
+                        popoverProps={{
+                            className: 'bg-white dark:bg-sky-600 shadow-lg rounded-xl z-[9999]',
+                        }}
                         className="z-10"
-                        value={sortAndFilter.filters.find((f: any) => f.column === col)?.value ? parseDate(sortAndFilter.filters.find((f: any) => f.column === col).value) : null}
+                        value={
+                            sortAndFilter.filters.find((f: any) => f.column === col)?.value
+                                ? parseDate(sortAndFilter.filters.find((f: any) => f.column === col).value)
+                                : null
+                        }
                         onChange={(date) => {
                             setSortAndFilter({
                                 ...sortAndFilter,
@@ -55,7 +59,7 @@ export default function ColumnDPHeader({
                     />
                 )}
             </div>
-            <div className="flex h-8 min-w-12 cursor-pointer justify-between items-center gap-1 p-1 hover:bg-blue-600" onClick={changeSort}>
+            <div className="flex h-8 min-w-12 cursor-pointer items-center justify-between gap-1 p-1 hover:bg-blue-600" onClick={changeSort}>
                 {sortAndFilter.sortBy !== col ? (
                     <ArrowsUpDownIcon className="size-4 fill-white" />
                 ) : sortAndFilter.sortDir === 'asc' ? (

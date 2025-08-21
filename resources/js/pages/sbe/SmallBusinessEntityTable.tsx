@@ -1,11 +1,10 @@
 import FTable from '@/components/FTable';
-import axios from 'axios';
-import { useEffect, useMemo, useState } from 'react';
 import Layout from '@/components/Layout';
-import CellAction from '@/components/table/CellAction';
+import CellActionSubject from '@/components/table/CellActionSubject';
 import ColumnHeader from '@/components/table/ColumnHeader';
 import { router } from '@inertiajs/react';
-import CellActionSubject from '@/components/table/CellActionSubject';
+import axios from 'axios';
+import { useEffect, useMemo, useState } from 'react';
 
 export default function SmallBusinessEntityTable() {
     const [data, setData] = useState([]);
@@ -29,14 +28,7 @@ export default function SmallBusinessEntityTable() {
             },
             {
                 accessorKey: 'name',
-                header: (
-                    <ColumnHeader
-                        title={'СУБЪЕКТ СМП'}
-                        col={'name'}
-                        sortAndFilter={sortAndFilter}
-                        setSortAndFilter={setSortAndFilter}
-                    />
-                ),
+                header: <ColumnHeader title={'СУБЪЕКТ СМП'} col={'name'} sortAndFilter={sortAndFilter} setSortAndFilter={setSortAndFilter} />,
             },
             {
                 accessorKey: 'registries_count',
@@ -50,7 +42,7 @@ export default function SmallBusinessEntityTable() {
                 ),
             },
         ],
-        [sortAndFilter]
+        [sortAndFilter],
     );
 
     const fetchEntities = async () => {
@@ -92,7 +84,7 @@ export default function SmallBusinessEntityTable() {
                     title="Субъекты СМП"
                     additionl={() => (
                         <button
-                            className="cursor-pointer rounded-xs font-medium bg-blue-500 py-3 px-4 text-white transition-colors hover:bg-blue-800 active:bg-blue-500"
+                            className="cursor-pointer rounded-xs bg-blue-500 px-4 py-3 font-medium text-white transition-colors hover:bg-blue-800 active:bg-blue-500"
                             onClick={() => router.get(route('sbe.create'))}
                         >
                             Добавить субъект

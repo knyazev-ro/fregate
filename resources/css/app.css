@@ -61,12 +61,11 @@
 }
 
 .rubik {
-  font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
-  /* font-weight: <weight>; */
-  font-style: normal;
+    font-family: 'Rubik', sans-serif;
+    font-optical-sizing: auto;
+    /* font-weight: <weight>; */
+    font-style: normal;
 }
-
 
 :root {
     --background: oklch(1 0 0);

@@ -72,12 +72,12 @@ export default function EditRegistry({ registry }) {
                 </div>
                 <div className="flex flex-col gap-4">
                     <div className="flex items-center gap-2">
-                            <div className="h-14 min-h-14 w-14 min-w-14 rounded-full bg-blue-100">
-                                <UserCircleIcon className="size-14 fill-blue-300" />
-                            </div>
-                        <div className='flex flex-col'>
-                            <div className='text-xs'>АВТОР</div>
-                            <div className='font-semibold text-sm'>{registry?.author?.name?.toUpperCase() ?? '[Не назначен]'}</div>
+                        <div className="h-14 min-h-14 w-14 min-w-14 rounded-full bg-blue-100">
+                            <UserCircleIcon className="size-14 fill-blue-300" />
+                        </div>
+                        <div className="flex flex-col">
+                            <div className="text-xs">АВТОР</div>
+                            <div className="text-sm font-semibold">{registry?.author?.name?.toUpperCase() ?? '[Не назначен]'}</div>
                         </div>
                     </div>
 
@@ -89,7 +89,7 @@ export default function EditRegistry({ registry }) {
                             value={data.small_business_entity}
                             loadOptions={loadOptionsSBE}
                             onChange={(e) => {
-                                setData(data => ({...data, small_business_entity_id: e.value, small_business_entity: e}))
+                                setData((data) => ({ ...data, small_business_entity_id: e.value, small_business_entity: e }));
                             }}
                             additional={{
                                 page: 1,
@@ -105,7 +105,7 @@ export default function EditRegistry({ registry }) {
                             value={data.supervisory_authority}
                             loadOptions={loadOptionsSupervisor}
                             onChange={(e) => {
-                                setData(data => ({...data, supervisory_authority_id: e.value, supervisory_authority: e}))
+                                setData((data) => ({ ...data, supervisory_authority_id: e.value, supervisory_authority: e }));
                             }}
                             additional={{
                                 page: 1,
@@ -155,12 +155,13 @@ export default function EditRegistry({ registry }) {
 
                 <div className="flex">
                     <button
-                    onClick={() => {
-                        registry?.id
-                        ? router.put(route('registry.update', registry.id), data)
-                        : router.post(route('registry.store'), data)
-                    }} 
-                    className="mt-4 rounded-sm bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">Сохранить</button>
+                        onClick={() => {
+                            registry?.id ? router.put(route('registry.update', registry.id), data) : router.post(route('registry.store'), data);
+                        }}
+                        className="mt-4 rounded-sm bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                    >
+                        Сохранить
+                    </button>
                 </div>
             </div>
         </Layout>

@@ -34,13 +34,13 @@ export default function ColumnHeader({
     };
 
     return (
-        <div className="flex cursor-pointer whitespace-nowrap items-center gap-1">
+        <div className="flex cursor-pointer items-center gap-1 whitespace-nowrap">
             <div className="flex items-center gap-1">
                 <div onClick={() => handleFilter()}>{title}</div>
                 {filter && (
                     <input
                         type="text"
-                        className="rounded-md bg-white px-2 py-1 font-medium  text-sm text-black"
+                        className="rounded-md bg-white px-2 py-1 text-sm font-medium text-black"
                         onChange={(e) => {
                             setSortAndFilter({
                                 ...sortAndFilter,
@@ -50,7 +50,7 @@ export default function ColumnHeader({
                     />
                 )}
             </div>
-            <div className="flex h-8 min-w-12 cursor-pointer justify-center items-center gap-1 p-1 hover:bg-blue-600" onClick={changeSort}>
+            <div className="flex h-8 min-w-12 cursor-pointer items-center justify-center gap-1 p-1 hover:bg-blue-600" onClick={changeSort}>
                 {sortAndFilter.sortBy !== col ? (
                     <ArrowsUpDownIcon className="size-4 fill-white" />
                 ) : sortAndFilter.sortDir === 'asc' ? (

@@ -1,11 +1,11 @@
 import { usePage } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import { useEffect, useState } from 'react';
 
 export function Errors({ errors }: { errors: Record<string, string> }) {
     return (
-        <div className="fixed top-4 right-4 p-4 rounded bg-red-500 text-white shadow-lg">
+        <div className="fixed top-4 right-4 rounded bg-red-500 p-4 text-white shadow-lg">
             {Object.values(errors).map((error, index) => (
                 <div key={index}>{error}</div>
             ))}
@@ -33,7 +33,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     }, [errors]);
 
     return (
-        <div className="flex rubik h-[calc(100vh-0rem)] min-h-screen flex-col overflow-hidden bg-white">
+        <div className="rubik flex h-[calc(100vh-0rem)] min-h-screen flex-col overflow-hidden bg-white">
             <Header />
             {showErr && <Errors errors={localErrors} />}
             <div className="flex h-full w-screen overflow-hidden">

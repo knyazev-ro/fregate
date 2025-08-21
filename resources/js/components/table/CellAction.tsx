@@ -17,8 +17,9 @@ export default function CellAction({ value }) {
                 >
                     <MenuItem>
                         <button
-                        onClick={() => router.get(route('registry.edit', value?.row?.original?.id))}
-                        className="group flex w-full cursor-pointer items-center gap-2 rounded-xs px-3 py-1.5 hover:bg-blue-100">
+                            onClick={() => router.get(route('registry.edit', value?.row?.original?.id))}
+                            className="group flex w-full cursor-pointer items-center gap-2 rounded-xs px-3 py-1.5 hover:bg-blue-100"
+                        >
                             <PencilIcon className="size-4 fill-stone-950" />
                             Редактировать
                             <kbd className="ml-auto hidden font-sans text-xs text-white/50 group-data-focus:inline">⌘E</kbd>
@@ -26,10 +27,11 @@ export default function CellAction({ value }) {
                     </MenuItem>
                     <MenuItem>
                         <button
-                        onClick={() => {
-                            document.location.href = route('registry.export.one', value?.row?.original?.id)
-                        }} 
-                        className="group flex w-full cursor-pointer items-center gap-2 rounded-xs px-3 py-1.5 hover:bg-blue-100">
+                            onClick={() => {
+                                document.location.href = route('registry.export.one', value?.row?.original?.id);
+                            }}
+                            className="group flex w-full cursor-pointer items-center gap-2 rounded-xs px-3 py-1.5 hover:bg-blue-100"
+                        >
                             <ArrowDownOnSquareStackIcon className="size-4 fill-stone-950" />
                             Экспорт
                             <kbd className="ml-auto hidden font-sans text-xs text-white/50 group-data-focus:inline">⌘D</kbd>

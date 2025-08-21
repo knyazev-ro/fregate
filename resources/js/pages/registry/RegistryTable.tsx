@@ -17,7 +17,7 @@ const RegistryTable = () => {
     const [loading, setLoading] = useState(true);
     const [importData, setImportData] = useState({
         file: null,
-    })
+    });
 
     const [sortAndFilter, setSortAndFilter] = useState({
         filters: [],
@@ -140,22 +140,19 @@ const RegistryTable = () => {
                     title="Реестр"
                     additionl={() => (
                         <div className="flex w-full flex-wrap justify-end gap-1 text-xs">
-                            <div
-                                className="cursor-pointer rounded-xs bg-blue-500 px-4 py-3 font-medium text-white transition-colors hover:bg-blue-800 active:bg-blue-500"
-                            
-                            >
+                            <div className="cursor-pointer rounded-xs bg-blue-500 px-4 py-3 font-medium text-white transition-colors hover:bg-blue-800 active:bg-blue-500">
                                 <input
-                                type='file'
-                                accept={".xlsx"}
-                                onChange={(e) => {
-                                    try{
-                                        axios.postForm(route('registry.import'), {
-                                            file: e?.target?.files[0] ?? null,
-                                        });
-                                    } catch(err) {
-                                        console.log(err);
-                                    }
-                                }}
+                                    type="file"
+                                    accept={'.xlsx'}
+                                    onChange={(e) => {
+                                        try {
+                                            axios.postForm(route('registry.import'), {
+                                                file: e?.target?.files[0] ?? null,
+                                            });
+                                        } catch (err) {
+                                            console.log(err);
+                                        }
+                                    }}
                                 />
                                 Импортировать
                             </div>
