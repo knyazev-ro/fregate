@@ -9,14 +9,14 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 
 class RegistryExport implements FromCollection, WithHeadings, WithMapping
 {
-    public function __construct(private int|null $id=null) {}
+    public function __construct(private array|null $id=null) {}
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
         return Registry::query()
-        ->when($this->id, fn ($query) => $query->where('id', $this->id))
+        ->when(!is_null($this->id), fn ($query) => $query->whereIn('id', $this->id))
         ->with(['author', 'smallBusinessEntity', 'supervisoryAuthority'])->get();
     }
 

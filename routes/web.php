@@ -23,6 +23,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/delete/{registry}', 'destroy')->name('destroy');
         Route::get('/export', 'export')->name('export');
         Route::get('/one/export/{id}', 'exportOne')->name('export.one');
+        Route::get('/many/export', 'exportMany')->name('export.many');
     });
 
     Route::prefix('sbe')->name('sbe.')->controller(SmallBusinessEntityController::class)->group(function () {

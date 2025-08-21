@@ -36,29 +36,35 @@ class RegistryController extends Controller
                 default => $registry->orderBy($sortBy, $sortDir),
             };
 
-            $filters = $request->filters ?? [];
-            foreach ($filters as $filter) {
-                $registry = match ($filter['column']) {
-                    'author.name' => $registry->whereHas('author', function ($query) use ($filter) {
-                        $query->where('name', 'like', '%' . $filter['value'] . '%');
-                    }),
-                    'small_business_entity.name' => $registry->whereHas('smallBusinessEntity', function ($query) use ($filter) {
-                        $query->where('name', 'like', '%' . $filter['value'] . '%');
-                    }),
-                    'supervisory_authority.name' => $registry->whereHas('supervisoryAuthority', function ($query) use ($filter) {
-                        $query->where('name', 'like', '%' . $filter['value'] . '%');
-                    }),
-                    'start_verification' => $registry->whereDate('start_verification', '>=', Carbon::parse($filter['value'])),
-                    'end_verification' => $registry->whereDate('end_verification', '<=', $filter['value']),
-                    'duration' => $registry->where('duration', '=', $filter['value']),
-                    default => $registry,
-                };
-            }
+            $registry = $this->applyFilters($registry, $request);
 
             return $registry->paginate($perPage);
         }
 
         return Inertia::render('registry/RegistryTable');
+    }
+
+    public function applyFilters($registry, $request)
+    {
+        $filters = $request->filters ?? [];
+        foreach ($filters as $filter) {
+            $registry = match ($filter['column']) {
+                'author.name' => $registry->whereHas('author', function ($query) use ($filter) {
+                    $query->where('name', 'like', '%' . $filter['value'] . '%');
+                }),
+                'small_business_entity.name' => $registry->whereHas('smallBusinessEntity', function ($query) use ($filter) {
+                    $query->where('name', 'like', '%' . $filter['value'] . '%');
+                }),
+                'supervisory_authority.name' => $registry->whereHas('supervisoryAuthority', function ($query) use ($filter) {
+                    $query->where('name', 'like', '%' . $filter['value'] . '%');
+                }),
+                'start_verification' => $registry->whereDate('start_verification', '>=', Carbon::parse($filter['value'])),
+                'end_verification' => $registry->whereDate('end_verification', '<=', $filter['value']),
+                'duration' => $registry->where('duration', '=', $filter['value']),
+                default => $registry,
+            };
+        }
+        return $registry;
     }
 
     public function editOrCreate(int|null $id = null)
@@ -71,7 +77,7 @@ class RegistryController extends Controller
         return Inertia::render('registry/EditRegistry', compact('registry'));
     }
 
-    public function updateOrStore(Request $request, int|null $id = null) 
+    public function updateOrStore(Request $request, int|null $id = null)
     {
         $data = $request->validate([
             'small_business_entity_id' => 'required|exists:small_business_entities,id',
@@ -90,7 +96,7 @@ class RegistryController extends Controller
             'duration.min' => 'Поле Продолжительность (дней) должно быть неотрицательным числом.',
         ]);
 
-        if(!$id) {
+        if (!$id) {
             $data['author_id'] = Auth::id();
         }
 
@@ -111,6 +117,12 @@ class RegistryController extends Controller
 
     public function exportOne(int $id)
     {
-        return Excel::download(new RegistryExport($id), "registry" . now()->format('Y-M-d h:i:s') . ".xlsx");
+        return Excel::download(new RegistryExport([$id]), "registry" . now()->format('Y-M-d h:i:s') . ".xlsx");
+    }
+
+    public function exportMany(Request $request) {
+        $registry  = Registry::query();
+        $registry =  $this->applyFilters($registry, $request);
+        return Excel::download(new RegistryExport($registry->pluck('id')->toArray()), "registry" . now()->format('Y-M-d h:i:s') . ".xlsx");
     }
 }

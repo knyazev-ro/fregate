@@ -136,12 +136,33 @@ const RegistryTable = () => {
                     onRowsPerPageChange={handleRowsPerPageChange}
                     title="Реестр"
                     additionl={() => (
-                        <div className='w-full flex justify-end gap-4'>
+                        <div className="flex w-full justify-end gap-4">
+                            <div
+                                onClick={() => {
+                                    axios
+                                        .get(route('registry.export.many'), {
+                                            params: sortAndFilter,
+                                            responseType: 'blob',
+                                        })
+                                        .then((res) => {
+                                            const url = window.URL.createObjectURL(new Blob([res.data]));
+                                            const link = document.createElement('a');
+                                            link.href = url;
+                                            link.setAttribute('download', 'export.xlsx');
+                                            document.body.appendChild(link);
+                                            link.click();
+                                            link.remove();
+                                        });
+                                }}
+                                className="cursor-pointer rounded-xs bg-blue-500 px-4 py-3 font-medium text-white transition-colors hover:bg-blue-800 active:bg-blue-500"
+                            >
+                                Экспортировать по фильтру
+                            </div>
                             <a
                                 className="cursor-pointer rounded-xs bg-blue-500 px-4 py-3 font-medium text-white transition-colors hover:bg-blue-800 active:bg-blue-500"
-                                href={route('registry.export')}
+                                href={route('registry.export.many')}
                             >
-                                Экспорт
+                                Экспортировать все
                             </a>
                             <button
                                 className="cursor-pointer rounded-xs bg-blue-500 px-4 py-3 font-medium text-white transition-colors hover:bg-blue-800 active:bg-blue-500"
@@ -154,7 +175,6 @@ const RegistryTable = () => {
                 />
             </div>
         </Layout>
-        // </Page>
     );
 };
 
