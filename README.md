@@ -104,3 +104,6 @@ php artisan view:cache
   ```
 
 ---
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/MLdWYoA"  ><a href="//imgur.com/a/MLdWYoA">Int freg</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/ksuS1j5"  ><a href="//imgur.com/a/ksuS1j5">db</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
